@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    network_mode: host
+    volumes:
+      - ./prometheus.yaml:/etc/prometheus/prometheus.yml
+
+  grafana:
+    image: grafana/grafana:latest
+    network_mode: host
+    volumes:
+      - ./grafana.yaml:/etc/grafana/provisioning/datasources/grafana.yaml
+    depends_on:
+      - prometheus
+
